@@ -1,16 +1,17 @@
 {
   "results": [
     {
+      "Disease": "Sars",
+      "Cases": "48098",
+      "Deaths": "810",
+      "Recovered": "5570"
+    },
+    {
       "Disease": "Corona Virus",
       "Cases": "67101",
       "Deaths": "1526",
       "Recovered": "8276"
-    },
-    {
-      "Disease": "Sars",
-      "Cases": "8,098",
-      "Deaths": "810",
-      "Recovered": "5570"
     }
+
   ]
 }
