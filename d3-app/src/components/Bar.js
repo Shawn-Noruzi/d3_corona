@@ -1,38 +1,29 @@
 import React, { useEffect, useRef } from "react";
-import * as d3 from "d3";
-import data from "../data/en_DXYArea_1581650515.json";
+import {select} from "d3";
+import useResizeObserver from "./useResizeObserver"
 
-const Bar = () => {
-  
-  let svgRef = useRef(null);
 
-  useEffect(() => draw(), [data]);
+const Bar = ({data,keys,colors}) => {
 
-  const draw = () => {
-    //define scales
-    const xScale = d3.scaleBand().domain(xAxisType === "Confirmed Cases").range(0, data.length);
-    const yScale = d3
-      .scaleLinear()
-      .domain([0,data.length])
-      .range([0, height]);
+  const svgRef = useRef(null);
+  const wrapperRef = useRef();
+  const dimensions = useResizeObserver(wrapperRef);
 
-    //grab elements and style/position
-    d3.select(svgRef.current)
-      .selectAll("rect")
-      .data(data)
-      .attr("x", d => xScale(d.x))
-      .attr("y", d => yScale(d.y))
-      .attr("width", xScale.bandwidth())
-      .attr("height", d => height - yScale(d.y))
-      .style("fill", d => d.color);
-  };
-  const bars = data.map(d => <rect key={d.x} />);
-console.log(data);
+  useEffect(() => {
+      const svg = select(svgRef.current);
+      const {width, height} = dimensions || wrapperRef.current.getBoundingClientRect();
+  }, [colors,data,dimensions,keys]);
+
+
   return (
-    // <svg width={width} height={height} ref={svgRef}>
-    //   {bars}
-    // </svg>
-    <p>Graph Bars</p>
+    <React.Fragment>
+        <div ref={wrapperRef} style={{marginBottom: "2rem"}}>
+            <svg ref = {svgRef}>
+                <g className="x-axis"/>
+                <g className="y-axis"/>
+            </svg>
+        </div>
+    </React.Fragment>
   );
 };
 
