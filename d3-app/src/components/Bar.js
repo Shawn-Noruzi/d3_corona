@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { select, scaleBand, axisBottom, stack, max, scaleLinear } from "d3";
+import { select, scaleBand, axisBottom, axisLeft, stack, max, scaleLinear } from "d3";
 import useResizeObserver from "../useResizeObserver";
 
 const Bar = ({ data, keys, colors }) => {
@@ -17,16 +17,18 @@ const Bar = ({ data, keys, colors }) => {
     //finds the max for y scale
     const layers = stackGenerator(data);
     const extent = [0,max(layers, layer => max(layer, sequence => sequence[1]))]
-
-    const yScale = scaleLinear().domain(extent).range([height,0]);
+    console.log(extent)
+    const yScale = scaleLinear().domain(extent).range([height-60,0]);
 
     const xScale = scaleBand()
       .domain(data.map(d => d.Disease))
       .range([0, width/2]);
 
     const xAxis = axisBottom(xScale);
-    svg.select(".x-axis").attr("transform", `translate(0,${height-30})`).call(xAxis)
+    svg.select(".x-axis").attr("transform", `translate(60,${height-30})`).call(xAxis)
 
+    const yAxis = axisLeft(yScale);
+    svg.select(".y-axis").attr("transform", "translate (" + 60 + " 30)").call(yAxis);
     // const yScale = scaleBand().domain()
   }, [colors, data, dimensions, keys]);
 
