@@ -1,0 +1,32 @@
+svg {
+    display: block;
+    width: 51%;
+    height: 300px;
+    background: #f7f7f7;
+    overflow: hidden;
+  }
+  
+  svg rect.selection {
+    stroke: none;
+  }
+  
+  .barTitle{
+      text-align:center;
+  }
+  
+  .field {
+    display: inline-block;
+    margin: 0 0.5em;
+  }
+  
+  .field input {
+    margin-right: 0.5em;
+  }
+
+  .container{
+      margin: 0 auto;
+  }
+
+  .App {
+    text-align: center;
+  }
